@@ -1,12 +1,19 @@
-// extrai a cor predominante da imagem
-// define uma variável rgb
-function avgColor(img) {
+function cToHex(c) {
+    var hex = c.toString(16);
+    return hex.length == 1 ? "0" + hex : hex;
+}
+
+function rgbToHex(rgb) {
+    return "#" + cToHex(rgb[0]) + cToHex(rgb[1]) + cToHex(rgb[2]);
+}
+
+function avgColor(img, hex = false) {
 
     const blocks = 20; // tamanho do bloco para seleção da cor (n * pixels)
 
     let rgb = [0, 0, 0]; // padrão
 
-    // cria um canvas
+    // cria um canvas e extrai o contexto
     const canvas = document.createElement('canvas'), 
           context = canvas.getContext && canvas.getContext('2d');
 
@@ -44,20 +51,32 @@ function avgColor(img) {
     rgb[1] = ~~(rgb[1]/count);
     rgb[2] = ~~(rgb[2]/count);
 
+    if ( hex ) {
+        rgb = rgbToHex(rgb);
+    } else {
+        rgb = rgb.join(', ');
+    }
+
     return rgb;
 }
+
+// Use it like this, or whatever you want, 
+// just run the function and it will extract the color from img.
 
 (async () => {
 
     window.addEventListener("load", event => {
-        let img = document.querySelector('img'); 
+        let img = document.querySelector('.me'); 
 
         // garantir que a img existe
         if(img.complete && img.naturalHeight !== 0) {
-            let rgb = avgColor(img), 
-            rgbText = 'rgb(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ')';
+            // rgb
+            let rgb = avgColor(img);
+            console.log(rgb);
 
-            console.log(rgbText);
+            // hex
+            let hex = avgColor(img, true);
+            console.log(hex);
         }
     });
 
