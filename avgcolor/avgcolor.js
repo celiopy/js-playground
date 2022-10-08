@@ -1,3 +1,5 @@
+// extrai a cor predominante da imagem
+// define uma variável rgb
 function avgColor(img) {
 
     const blocks = 20; // tamanho do bloco para seleção da cor (n * pixels)
@@ -45,22 +47,7 @@ function avgColor(img) {
     return rgb;
 }
 
-// brightness
-// const brightness = Math.round(((parseInt(rgb[0]) * 299) +
-// (parseInt(rgb[1]) * 587) +
-// (parseInt(rgb[2]) * 114)) / 1000);
-// // console.log(brightness);
-
-// rgb[3] = (brightness > 175) ? 'black' : 'white';
-
 (async () => {
-//   let blob = await fetch("https://images.unsplash.com/photo-1537017469405-7faf1912af7c?ixid=MnwzMDUwMHwwfDF8cmFuZG9tfHx8fHx8fHx8MTY1Mzk5ODA1OQ&ixlib=rb-1.2.1").then(r => r.blob());
-//   let dataUrl = await new Promise(resolve => 
-//   {
-//     let reader = new FileReader();
-//     reader.onload = () => resolve(reader.result);
-//     reader.readAsDataURL(blob);
-//   });
 
     window.addEventListener("load", event => {
         let img = document.querySelector('img'); 
